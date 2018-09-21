@@ -1,4 +1,4 @@
-1.
+
 def unique(e):
     l = []
     for i in e:
@@ -6,7 +6,7 @@ def unique(e):
             l.append(i)
             i+=1
     return n
-3.
+
 def mex(e):
     i=1
     while True:
