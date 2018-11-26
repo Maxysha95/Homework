@@ -1,5 +1,9 @@
 import itertools
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9064605c4df70c502a0b11c40e15ec16f86cf266
 def squares(a):
     for i in a:
         yield i**2

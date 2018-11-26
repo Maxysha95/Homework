@@ -4,6 +4,7 @@ def valuesunion(*dicts):
         for k,v in d.items():
             s.add(v)
     return s
+<<<<<<< HEAD
 
 
     assert valuesunion({1: 2, 4: 8}) == {2, 8}
@@ -64,6 +65,19 @@ def subpalindrome(s):
     print("subpalindrome works")
 
 
+=======
+print(valuesunion({1: 2, 4: 8}))
+print(valuesunion({1: 2, 4: 8}, {'a': 'b'}, {}, {}))
+
+
+def popcount(n):
+    return bin(n).count('1')
+
+print(popcount(0))
+print(popcount(1))
+print(popcount(10))
+print(popcount(1023))
+>>>>>>> 9064605c4df70c502a0b11c40e15ec16f86cf266
 
 
 from functools import reduce
