@@ -1,6 +1,5 @@
 import itertools
 
-
 def squares(a):
     for i in a:
         yield i**2
