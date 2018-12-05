@@ -46,7 +46,7 @@ def subpalindrome(s):
 
 def isIPv4(s):
     for ch in s:
-        if ch not in('1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '.'):
+        if not ch.isdigit() and ch != '.':
             return False
     if len(s.split(".")) != 4:
         return False
@@ -130,3 +130,6 @@ if __name__ == '__main__':
     assert fibonacci(6) == 8
     assert fibonacci(7) == 13
     print("fibonacci - OK")
+
+
+    print(subpalindrome('zabacj'))
