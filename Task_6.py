@@ -9,9 +9,7 @@ def getdiagonal(a):
 
 
 def cutarray(a, minvalue, maxvalue):
-    a[a < minvalue] = minvalue
-    a[a > maxvalue] = maxvalue
-    return a
+    return np.clip(a, minvalue, maxvalue)
 
 
 def getmoments(a):
@@ -81,4 +79,3 @@ if __name__ == '__main__':
 
     print(getones(3, 1))
     print(getones(3, 9))
-    
