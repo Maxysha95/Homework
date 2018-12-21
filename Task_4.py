@@ -22,21 +22,24 @@ def recurrent(n):
     if n < 2:
         return n
     elif n % 2 == 0:
-        return recurrent(n/2)
+        return recurrent(n//2)
     else:
-         return recurrent((n - 1)/2) + recurrent((n - 1)/2 + 1)
+         return recurrent((n - 1)//2) + recurrent((n - 1)//2 + 1)
 
 
 def digitsum(n):
-    s = 0
-    while n > 0:
-        s += n % 10
-        n //= 10
-    return s
+    if n // 10 == 0:
+        return n
+    else:
+        return n % 10 + digitsum(n // 10)
 
 
 def reversestring(s):
-    return ''.join(reversed(s))
+    if len(s) <= 1:
+        return s
+    else:
+        return s[-1] + reversestring(s[0:-1])
+
 
 
 def ackermann(m, n):
@@ -75,10 +78,40 @@ def gcd(a, b):
     else:
         return gcd(b, a % b)
 
-"""def drawborders(n):
-def genbinarystrings(n):
+
 def parentheses(s):
-def mergesort(a): - ??? """
+    if len(s) <= 2:
+        return '(' + s + ')'
+    return '(' + s[0] + parentheses(s[1:-1]) + s[-1] + ')'
+
+def mergesort(a):
+    if len(a) > 1:
+        middle= len(a) // 2
+        left = a[:middle]
+        right = a[middle:]
+        left = mergesort(left)
+        right = mergesort(right)
+        i = 0
+        j = 0
+        k = 0
+        while i < len(left) and j < len(right):
+            if left[i] < right[j]:
+                a[k] = left[i]
+                i += 1
+            else:
+                a[k] = right[j]
+                j += 1
+            k += 1
+        while i < len(left):
+            a[k] = left[i]
+            i += 1
+            k += 1
+        while j < len(right):
+            a[k] = right[j]
+            j += 1
+            k += 1
+    return a
+
 
 
 if __name__ == '__main__':
@@ -143,3 +176,16 @@ if __name__ == '__main__':
     assert gcd(18, 12) == 6
     assert gcd(283918822, 595730520) == 22
     print("gsd is ok")
+
+
+    assert parentheses('example') == '(e(x(a(m)p)l)e)'
+    assert parentheses('odd') == '(o(d)d)'
+    assert parentheses('even') == '(e(ve)n)'
+    print('parentheses is ok')
+
+
+    assert mergesort([]) == []
+    assert mergesort([100]) == [100]
+    assert mergesort([1, 3, 2]) == [1, 2, 3]
+    assert mergesort([1, 3, 5, 4, 2]) == [1, 2, 3, 4, 5]
+    print('mergesort is ok')
