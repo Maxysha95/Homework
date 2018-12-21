@@ -1,4 +1,4 @@
-import itertools
+from itertools import tee, count, starmap
 
 def squares(a):
     for i in a:
@@ -6,9 +6,9 @@ def squares(a):
 
 
 def repeatntimes(elems, n):
-    for n in range(n):
-        for i in elems:
-            yield i
+    for item in tee(elems, n):
+        yield from item
+
 
 
 def evens(x):
@@ -33,11 +33,16 @@ def digitsumdiv(p):
 
 
 def extractnumbers(s):
-    return list(filter(lambda x: x.isdigit(), s))
+    return filter(lambda x: x.isdigit(), s)
 
 
+def changecase(s):
+    return map(lambda x: x.swapcase(), s)
 
 
+def productif(elems, conds):
+    return reduce(lambda x, y: x * y, map(lambda x: x[0] if x[1] is True else
+                                          1, zip(elems, conds)), 1)
 
 
 if __name__ == '__main__':
@@ -56,12 +61,4 @@ if __name__ == '__main__':
     for i in range(9):
         print (next(it))
 
-
-    it = digitsumdiv(5)
-    for i in range(6):
-        print (next(it))
-
-
-    assert list(extractnumbers('12345')) == ['1','2', '3', '4', '5']
-    assert list(extractnumbers('a1b2c3d4e5')) == ['1', '2', '3', '4', '5']
-    print( "extractnumbers is ok")
+print(list(repeatntimes(map(lambda x: x**2, range(3)), 2)))
