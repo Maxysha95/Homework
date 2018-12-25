@@ -26,12 +26,12 @@ class FSItem(object):
 
     def create(self):
         if os.path.exists(self.path):
-            raise FileSystemError("{0} already exists".format(self.path))
+            raise FileSystemError("Item {0} with such path already exists".format(self.path))
         else:
-             open(self.path, 'a').close()
+            open(self.path, 'a').close()
 
     def getname(self):
-        return os.path.curname(self.path)
+        return os.path.basename(self.path)
 
     def isfile(self):
         return os.path.isfile(self.path)
@@ -97,6 +97,13 @@ class Directory(FSItem):
         else:
             raise FileSystemError("{0} directory not exists".format(self.path))
 
+    def create(self):
+        if os.path.exists(self.path):
+            raise FileSystemError("{0} already exists".
+                                  format(self.path))
+        else:
+            os.makedirs(self.path)
+
     def subdirectories(self):
         if os.path.exists(self.path):
             yield from filter(lambda x: x.isdirectory(), self.items())
@@ -104,7 +111,14 @@ class Directory(FSItem):
             raise FileSystemError("{0} directory not exists".format(self.path))
 
     def filesrecursive(self):
-        pass
+        if os.path.exists(self.path):
+            for file in self.files():
+                yield file
+            for dir in self.subdirectories():
+                yield from directory.filesrecursive()
+
+        else:
+            raise FileSystemError("File {0} does not exist".format(self.path))
 
     def getsubdirectory(self, name):
         return Directory(os.path.join(self.path, name))
